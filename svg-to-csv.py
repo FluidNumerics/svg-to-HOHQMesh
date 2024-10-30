@@ -5,13 +5,13 @@ from numpy import linspace
 from math import sqrt
 
 
-svg_file = "pumpkin-smooth.svg"  # input
+svg_file = "examples/pumpkin/pumpkin-smooth.svg"  # input
 csv_file = "coordinates.csv"  # output
 
 tree = ET.parse(svg_file)
 root = tree.getroot()
 
-n_nodes = 20
+n_nodes = 21
 with open(csv_file, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["t", "x", "y", "z", "path_label", "boundary_label"])
