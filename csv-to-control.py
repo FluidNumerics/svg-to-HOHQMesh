@@ -1,5 +1,6 @@
 import csv
 import matplotlib.pyplot as plt
+import numpy as np
 
 # debugging
 write_inner_boundaries = True
@@ -80,8 +81,10 @@ with open(control_file, "w") as f:
 
     last_path_index = -1
     current_segment_index = -1
+    shoelace_area = 0
+    position_vectors = np.zeros((1, 2))
+
     for index, row in enumerate(boundary_data):
-        current_xy = row[1:3]
         current_path_index = path_index[row[4]]
 
         new_segment = False
@@ -91,11 +94,45 @@ with open(control_file, "w") as f:
             current_segment_index += 1
         if current_path_index != last_path_index:
             new_path = True
-            last_path_xy = row[1:3]
 
-        # if new_segment and not new_path:
-        #     if row[1:3] != last_row[1:3]:
-        #         row[1:3] = last_row[1:3]
+        position_vector = np.array(
+            [
+                float(row[1]),
+                float(row[2]),
+            ]
+        ).reshape((1, 2))
+
+        # Check if all paths are clockwise ------------------------------------
+        if not new_path:
+            position_vectors = np.concatenate(
+                (position_vectors, position_vector), axis=0
+            )
+        if index == 0:
+            init_path_row = row
+
+        if (new_path and index != 0) or (row == boundary_data[-1]):
+            position_vectors[0] = np.array(
+                [
+                    float(last_row[1]),
+                    float(last_row[2]),
+                ]
+            ).reshape((1, 2))
+            for i in range(position_vectors.shape[0] - 1):
+                local_vectors = position_vectors[i : i + 2]
+                shoelace_area += np.linalg.det(local_vectors)
+            local_vectors = position_vectors[-1].reshape((1, 2))
+            local_vectors = np.concatenate(
+                (local_vectors, position_vectors[0].reshape((1, 2))), axis=0
+            )
+            shoelace_area += np.linalg.det(local_vectors)
+            if shoelace_area < 0:
+                raise ValueError(
+                    f"path '{init_path_row[4]}' is reversed. HOHQMesh will fail to run."
+                )
+            shoelace_area = 0
+            position_vectors = np.zeros((1, 2))
+            init_path_row = row
+        # ---------------------------------------------------------------------
         coordinates = " ".join(row[0:4])
 
         # OUTER BOUNDARY ------------------------------------------------------
