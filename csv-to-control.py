@@ -1,6 +1,10 @@
 import csv
 import matplotlib.pyplot as plt
 
+# debugging
+write_inner_boundaries = True
+inner_boundaries_exist = False
+
 # user defined parameters
 csv_file = "coordinates.csv"  # input
 control_file = "pumpkin.control"  # output
@@ -12,7 +16,7 @@ mesh_file_format = "ISM"
 polynomial_order = 5
 plot_file_format = "sem"
 # Background grid
-background_grid_size = [12.0, 12.0, 0.0]
+background_grid_size = [15.0, 15.0, 0.0]
 # Smoothing
 smoothing = "ON"
 smoothing_type = "LinearAndCrossbarSpring"
@@ -114,9 +118,10 @@ with open(control_file, "w") as f:
                 f.write(f"            nKnots = {n_knots}" + "\n")
                 f.write(r"            \begin{SPLINE_DATA}" + "\n")
             f.write("                " + coordinates + "\n")
-            plt.scatter(float(row[1]), float(row[2]))
+            # plt.scatter(float(row[1]), float(row[2]))
         # INNER BOUNDARIES ----------------------------------------------------
-        elif row[5] == "InnerBoundary":
+        elif row[5] == "InnerBoundary" and write_inner_boundaries:
+            inner_boundaries_exist = True
             if last_path_index == 0:
                 current_segment_index = 0
                 n_knots = knot_count[current_path_index][current_segment_index]
@@ -162,7 +167,7 @@ with open(control_file, "w") as f:
                 f.write(f"            nKnots = {n_knots}" + "\n")
                 f.write(r"            \begin{SPLINE_DATA}" + "\n")
             f.write("                " + coordinates + "\n")
-            plt.scatter(float(row[1]), float(row[2]))
+            # plt.scatter(float(row[1]), float(row[2]))
         else:
             pass
             # raise Warning(
@@ -172,11 +177,18 @@ with open(control_file, "w") as f:
         last_segment_index = current_segment_index
         last_row = row
 
-    f.write(r"            \end{SPLINE_DATA}" + "\n")
-    f.write(r"        \end{SPLINE_CURVE}" + "\n")
-    f.write(r"    \end{CHAIN}" + "\n")
-    f.write(r"\end{INNER_BOUNDARIES}" + "\n")
-    f.write(r"\end{MODEL}" + "\n")
-    f.write(r"\end{FILE}")
+    if write_inner_boundaries and inner_boundaries_exist:
+        f.write(r"            \end{SPLINE_DATA}" + "\n")
+        f.write(r"        \end{SPLINE_CURVE}" + "\n")
+        f.write(r"    \end{CHAIN}" + "\n")
+        f.write(r"\end{INNER_BOUNDARIES}" + "\n")
+        f.write(r"\end{MODEL}" + "\n")
+        f.write(r"\end{FILE}")
+    else:
+        f.write(r"            \end{SPLINE_DATA}" + "\n")
+        f.write(r"        \end{SPLINE_CURVE}" + "\n")
+        f.write(r"\end{OUTER_BOUNDARY}" + "\n")
+        f.write(r"\end{MODEL}" + "\n")
+        f.write(r"\end{FILE}")
 
-plt.show()
+# plt.show()
