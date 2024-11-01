@@ -11,7 +11,10 @@ csv_file = "coordinates.csv"  # output
 tree = ET.parse(svg_file)
 root = tree.getroot()
 
-n_nodes = 21
+n_nodes = 6
+
+tolerance = 1e-4
+
 with open(csv_file, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["t", "x", "y", "z", "path_label", "boundary_label"])
@@ -22,15 +25,28 @@ with open(csv_file, "w", newline="") as f:
                 "{http://www.inkscape.org/namespaces/inkscape}label"
             )
             d = path_element.get("d")
-            # transforms = path_element.get("transform")
             path = svgpathtools.parse_path(d)
-            # for transform in transforms:
-            #     path = svgpathtools.transform_path(
-            #         path,
-            #         transform,
-            #     )
+            name = path_element.get("id")
+
+            # Sometimes SVGpathtools will append a Line if it thinks the path doesn't connect
+            for segment in path:
+                if type(segment) == svgpathtools.path.Line and len(path) - 1:
+                    distance = sqrt(
+                        (segment.start.real - segment.end.real) ** 2
+                        + (segment.start.imag - segment.end.imag) ** 2
+                    )
+                    if distance < tolerance:
+                        print(
+                            "WARNING: Skipping erroneous line between path start and end \n"
+                        )
+                        print(name)
+                        print(segment.start)
+                        print(segment.end)
+
+                        path = path[:-1]
 
             for i, segment in enumerate(path):
+
                 for t in linspace(0, 1, n_nodes, endpoint=True):
                     point = segment.point(t)
                     x, y = point.real, point.imag
@@ -57,13 +73,15 @@ with open(csv_file, "w", newline="") as f:
                         path_x0, path_y0 = x, y
                     elif t == 1.0 and i == len(path) - 1:
                         error = sqrt((x - path_x0) ** 2 + (y - path_y0) ** 2)
-                        if error > 1e-4:
+                        if error >= tolerance:
                             print(
                                 "WARNING: Large error between path start and end points:\n"
                             )
+                            print(f"path:\n    {name}")
                             print(f"end point:\n    {x}\n    {y}\n")
                             print(f"start point:\n    {path_x0}\n    {path_y0}\n")
                         x, y = path_x0, path_y0
+
                     writer.writerow(
                         [
                             f"{float(t):.15f}",

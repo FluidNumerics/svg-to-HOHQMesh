@@ -17,11 +17,11 @@ mesh_file_format = "ISM"
 polynomial_order = 5
 plot_file_format = "sem"
 # Background grid
-background_grid_size = [15.0, 15.0, 0.0]
+background_grid_size = [50.0, 50.0, 0.0]
 # Smoothing
 smoothing = "ON"
 smoothing_type = "LinearAndCrossbarSpring"
-numer_of_iterations = 25
+numer_of_iterations = 100
 
 # boundary_data = {}
 boundary_data = []
@@ -155,7 +155,7 @@ with open(control_file, "w") as f:
                 f.write(f"            nKnots = {n_knots}" + "\n")
                 f.write(r"            \begin{SPLINE_DATA}" + "\n")
             f.write("                " + coordinates + "\n")
-            # plt.scatter(float(row[1]), float(row[2]))
+            plt.scatter(float(row[1]), float(row[2]))
         # INNER BOUNDARIES ----------------------------------------------------
         elif row[5] == "InnerBoundary" and write_inner_boundaries:
             inner_boundaries_exist = True
@@ -204,7 +204,7 @@ with open(control_file, "w") as f:
                 f.write(f"            nKnots = {n_knots}" + "\n")
                 f.write(r"            \begin{SPLINE_DATA}" + "\n")
             f.write("                " + coordinates + "\n")
-            # plt.scatter(float(row[1]), float(row[2]))
+            plt.scatter(float(row[1]), float(row[2]))
         else:
             pass
             # raise Warning(
@@ -228,4 +228,4 @@ with open(control_file, "w") as f:
         f.write(r"\end{MODEL}" + "\n")
         f.write(r"\end{FILE}")
 
-# plt.show()
+plt.show()
