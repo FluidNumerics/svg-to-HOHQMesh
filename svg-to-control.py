@@ -41,6 +41,8 @@ numer_of_iterations = 1000
 # svg-to-csv ------------------------------------------------------------------
 tree = ET.parse(svg_file)
 root = tree.getroot()
+# get page height
+page_height = float(root.attrib["viewBox"].split()[3])
 
 # n_nodes = 6 is usually sufficient, but particularly
 # complex segments might require more nodes
@@ -117,6 +119,7 @@ with open(csv_file, "w", newline="") as f:
                             print(f"start point:\n    {path_x0}\n    {path_y0}\n")
                         x, y = path_x0, path_y0
 
+                    y = page_height - y
                     writer.writerow(
                         [
                             f"{float(t):.15f}",
