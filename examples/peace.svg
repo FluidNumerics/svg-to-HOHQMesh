@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
-     inkscape:zoom="1.9088644"
-     inkscape:cx="188.85574"
-     inkscape:cy="189.11767"
+     inkscape:zoom="1.349771"
+     inkscape:cx="166.32451"
+     inkscape:cy="177.80794"
      inkscape:window-width="1920"
      inkscape:window-height="995"
      inkscape:window-x="0"
@@ -61,8 +61,8 @@
      id="layer1">
     <path
        id="path1"
-       style="stroke-width:2;stroke:#000000;stroke-opacity:1;fill:none;stroke-dasharray:none;marker-mid:url(#ArrowWide);marker-end:url(#ArrowWide)"
-       d="M 100,50 A 50,50 0 0 1 50,100 50,50 0 0 1 0,50 50,50 0 0 1 50,0 50,50 0 0 1 100,50 Z"
+       style="stroke-width:2;stroke:none;stroke-opacity:1;fill:#000000;stroke-dasharray:none;marker-mid:url(#ArrowWide);marker-end:url(#ArrowWide);fill-opacity:1"
+       d="M 100,50 A 50,50 0 0 0 50,0 50,50 0 0 0 0,50 50,50 0 0 0 50,100 50,50 0 0 0 100,50 Z"
        inkscape:label="outer" />
   </g>
   <g
@@ -70,34 +70,28 @@
      id="layer2"
      inkscape:label="InnerBoundaries">
     <path
-       style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:2;stroke-opacity:1;stroke-dasharray:none;marker-mid:"
-       d="m 44.999788,62.087635 0,27.570927 a 40,40 0 0 1 -19.458244,-8.1132 z"
+       style="fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:2;stroke-opacity:1;stroke-dasharray:none;marker-mid:"
+       d="M 44.999788,62.087635 25.541544,81.545362 a 40,40 0 0 0 19.458244,8.1132 z"
        id="path4"
        inkscape:label="one" />
     <path
-       style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
-       d="M 55.000061,62.087635 74.49565,81.583224 a 40,40 0 0 1 -19.495955,8.022158 z"
+       style="fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:2;stroke-dasharray:none;stroke-opacity:1;marker-mid:"
+       d="m 55.000061,62.087635 -3.66e-4,27.517747 A 40,40 0 0 0 74.49565,81.583224 Z"
        id="path4-6"
        inkscape:label="five" />
     <path
-       style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:2;stroke-opacity:1;stroke-dasharray:none;marker-mid:"
-       d="M 54.999695,10.341439 A 40,40 0 0 1 90.000142,50.01602 40,40 0 0 1 81.529341,74.473958 L 54.999695,47.944312 Z"
+       style="fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:2;stroke-opacity:1;stroke-dasharray:none;marker-mid:"
+       d="M 54.999695,10.341439 V 47.944312 L 81.529341,74.473958 A 40,40 0 0 0 90.000142,50.01602 40,40 0 0 0 54.999695,10.341439 Z"
        id="path1-5"
        inkscape:label="two" />
     <path
-       style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:2;stroke-opacity:1;stroke-dasharray:none;marker-mid:"
-       d="M 44.999788,10.373479 V 47.944828 L 18.470141,74.474475 A 40,40 0 0 1 9.9998577,50.01602 40,40 0 0 1 44.999788,10.373479 Z"
+       style="fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:2;stroke-opacity:1;stroke-dasharray:none;marker-mid:"
+       d="M 44.999788,10.373479 A 40,40 0 0 0 9.9998577,50.01602 40,40 0 0 0 18.470141,74.474475 L 44.999788,47.944828 Z"
        id="path2"
        inkscape:label="four" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="temp">
-    <path
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#ArrowWide)"
-       d="M 108.14469,0.96111779 127.60293,20.419361 a 40,40 0 0 1 -19.45824,8.1132 z"
-       id="path3"
-       inkscape:label="three" />
-  </g>
+     inkscape:label="temp" />
 </svg>
