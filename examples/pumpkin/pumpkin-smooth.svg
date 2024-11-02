@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
-     inkscape:zoom="0.35662075"
-     inkscape:cx="866.46669"
-     inkscape:cy="1001.0635"
+     inkscape:zoom="0.5043379"
+     inkscape:cx="744.54051"
+     inkscape:cy="460.00905"
      inkscape:window-width="1920"
      inkscape:window-height="995"
      inkscape:window-x="1920"
@@ -73,7 +73,7 @@
      style="display:inline">
     <path
        id="path1"
-       style="fill:#f9f9f9;stroke-width:4.23333329;stroke:#000000;stroke-opacity:1;stroke-dasharray:none;marker-mid:url(#ArrowWide)"
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:4.23333;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#ArrowWide)"
        inkscape:label="righteye"
        inkscape:transform-center-y="-10.998522"
        d="m 133.35,185.99895 c 9.35612,-0.33777 42.01809,56.8292 38.1,65.99114 -3.91809,9.16194 -72.619682,3.41992 -76.200002,0 -3.58032,-3.41992 28.743882,-65.65337 38.100002,-65.99114 z"
@@ -87,11 +87,11 @@
        sodipodi:nodetypes="zzzz" />
     <path
        id="path1-0"
-       style="fill:#f9f9f9;stroke-width:4.23333329;stroke:#000000;stroke-opacity:1;stroke-dasharray:none;marker-mid:url(#ArrowWide)"
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:4.23333;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#ArrowWide)"
        inkscape:label="nose"
        inkscape:transform-center-y="-10.998522"
-       d="m 254,251.99038 c 6.99176,-0.50665 47.42233,61.05128 38.09999,65.99114 -9.32234,4.93986 -73.2952,3.41992 -76.19999,0 -2.90479,-3.41992 31.10824,-65.48449 38.1,-65.99114 z"
-       sodipodi:nodetypes="zzzz" />
+       d="m 254,251.99038 c 14.82649,-0.19553 47.42233,61.05128 38.09999,65.99114 -9.32234,4.93986 -73.2952,3.41992 -76.19999,0 -2.90479,-3.41992 24.38515,-65.81027 38.1,-65.99114 z"
+       sodipodi:nodetypes="szzs" />
     <path
        id="path2"
        style="fill:#f9f9f9;stroke-width:4.23333329;stroke:#000000;stroke-opacity:1;stroke-dasharray:none;marker-mid:url(#ArrowWide)"

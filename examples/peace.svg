@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4-dev (1:1.4.0-dev+202403210151+2fe0648968)"
+   sodipodi:docname="peace.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.9088644"
+     inkscape:cx="188.85574"
+     inkscape:cy="189.11767"
+     inkscape:window-width="1920"
+     inkscape:window-height="995"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="ArrowWide"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc"
+         id="path5" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="OuterBoundary"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path1"
+       style="stroke-width:2;stroke:#000000;stroke-opacity:1;fill:none;stroke-dasharray:none;marker-mid:url(#ArrowWide);marker-end:url(#ArrowWide)"
+       d="M 100,50 A 50,50 0 0 1 50,100 50,50 0 0 1 0,50 50,50 0 0 1 50,0 50,50 0 0 1 100,50 Z"
+       inkscape:label="outer" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="InnerBoundaries">
+    <path
+       style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:2;stroke-opacity:1;stroke-dasharray:none;marker-mid:"
+       d="m 44.999788,62.087635 0,27.570927 a 40,40 0 0 1 -19.458244,-8.1132 z"
+       id="path4"
+       inkscape:label="one" />
+    <path
+       style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+       d="M 55.000061,62.087635 74.49565,81.583224 a 40,40 0 0 1 -19.495955,8.022158 z"
+       id="path4-6"
+       inkscape:label="five" />
+    <path
+       style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:2;stroke-opacity:1;stroke-dasharray:none;marker-mid:"
+       d="M 54.999695,10.341439 A 40,40 0 0 1 90.000142,50.01602 40,40 0 0 1 81.529341,74.473958 L 54.999695,47.944312 Z"
+       id="path1-5"
+       inkscape:label="two" />
+    <path
+       style="fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:2;stroke-opacity:1;stroke-dasharray:none;marker-mid:"
+       d="M 44.999788,10.373479 V 47.944828 L 18.470141,74.474475 A 40,40 0 0 1 9.9998577,50.01602 40,40 0 0 1 44.999788,10.373479 Z"
+       id="path2"
+       inkscape:label="four" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="temp">
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-dasharray:none;stroke-opacity:1;marker-mid:url(#ArrowWide)"
+       d="M 108.14469,0.96111779 127.60293,20.419361 a 40,40 0 0 1 -19.45824,8.1132 z"
+       id="path3"
+       inkscape:label="three" />
+  </g>
+</svg>
