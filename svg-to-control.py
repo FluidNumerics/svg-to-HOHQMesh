@@ -22,18 +22,16 @@ else:
 write_inner_boundaries = True
 plot = False
 
-# user defined parameters
-# svg_file = "examples/hitchcock.svg"  # input
+# file names
 csv_file = "coordinates.csv"  # csv
-# control_file = f"hitchcock.control"  # output
-# core_name = control_file.split(".")[0]
 mesh_file_name = core_name + ".mesh"
 plot_file_name = core_name + ".tec"
 stats_file_name = core_name + ".txt"
+
+# HOHQMesh control file variables
 mesh_file_format = "ISM"
 polynomial_order = 5
 plot_file_format = "sem"
-# Background grid
 background_grid_size = [5.0, 5.0, 0.0]
 # Smoothing
 smoothing = "ON"
