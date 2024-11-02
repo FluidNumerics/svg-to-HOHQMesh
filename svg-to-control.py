@@ -1,15 +1,32 @@
+import svgpathtools
 import csv
-import matplotlib.pyplot as plt
 import numpy as np
+import xml.etree.ElementTree as ET
+from numpy import linspace
+from math import sqrt
+import matplotlib.pyplot as plt
+import sys
+import os
+
+# check arguments
+if len(sys.argv) < 2:
+    raise ValueError("No .svg file specified.")
+
+else:
+    svg_file = sys.argv[1]
+    basename = os.path.basename(svg_file)
+    core_name = os.path.splitext(basename)[0]
+    control_file = f"{core_name}.control"
 
 # debugging
 write_inner_boundaries = True
-inner_boundaries_exist = False
+plot = False
 
 # user defined parameters
-csv_file = "coordinates.csv"  # input
-control_file = "pumpkin.control"  # output
-core_name = control_file.split(".")[0]
+# svg_file = "examples/hitchcock.svg"  # input
+csv_file = "coordinates.csv"  # csv
+# control_file = f"hitchcock.control"  # output
+# core_name = control_file.split(".")[0]
 mesh_file_name = core_name + ".mesh"
 plot_file_name = core_name + ".tec"
 stats_file_name = core_name + ".txt"
@@ -17,19 +34,113 @@ mesh_file_format = "ISM"
 polynomial_order = 5
 plot_file_format = "sem"
 # Background grid
-background_grid_size = [50.0, 50.0, 0.0]
+background_grid_size = [5.0, 5.0, 0.0]
 # Smoothing
 smoothing = "ON"
 smoothing_type = "LinearAndCrossbarSpring"
-numer_of_iterations = 100
+numer_of_iterations = 1000
 
-# boundary_data = {}
+# svg-to-csv ------------------------------------------------------------------
+tree = ET.parse(svg_file)
+root = tree.getroot()
+
+# n_nodes = 6 is usually sufficient, but particularly
+# complex segments might require more nodes
+n_nodes = 6
+
+# Used to make sure paths close correctly
+tolerance = 1e-4
+
+with open(csv_file, "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["t", "x", "y", "z", "path_label", "boundary_label"])
+    for g in root.findall(".//{http://www.w3.org/2000/svg}g"):
+        g_label = g.get("{http://www.inkscape.org/namespaces/inkscape}label")
+        for path_element in g.findall(".//{http://www.w3.org/2000/svg}path"):
+            path_label = path_element.get(
+                "{http://www.inkscape.org/namespaces/inkscape}label"
+            )
+            d = path_element.get("d")
+            path = svgpathtools.parse_path(d)
+            name = path_element.get("id")
+
+            # Sometimes SVGpathtools will append a Line
+            # if it thinks the path doesn't connect
+            for segment in path:
+                if type(segment) == svgpathtools.path.Line and len(path) - 1:
+                    distance = sqrt(
+                        (segment.start.real - segment.end.real) ** 2
+                        + (segment.start.imag - segment.end.imag) ** 2
+                    )
+                    if distance < tolerance:
+                        print(
+                            "WARNING: Skipping erroneous line between path start and end \n"
+                        )
+                        print(name)
+                        print(segment.start)
+                        print(segment.end)
+
+                        path = path[:-1]
+
+            for i, segment in enumerate(path):
+
+                for t in linspace(0, 1, n_nodes, endpoint=True):
+                    point = segment.point(t)
+                    x, y = point.real, point.imag
+
+                    # segment start and end
+                    if t == 1.0:
+                        last_segment_x1, last_segment_y1 = x, y
+                    elif t == 0.0 and i != 0:
+                        error = sqrt(
+                            (x - last_segment_x1) ** 2 + (y - last_segment_y1) ** 2
+                        )
+                        if error > 1e-4:
+                            print(
+                                "WARNING: Large error between segment start and end points:\n"
+                            )
+                            print(f"end point:\n    {x}\n    {y}\n")
+                            print(
+                                f"start point:\n    {last_segment_x1}\n    {last_segment_y1}\n"
+                            )
+                        x, y = last_segment_x1, last_segment_y1
+
+                    # path start and end
+                    if t == 0.0 and i == 0:
+                        path_x0, path_y0 = x, y
+                    elif t == 1.0 and i == len(path) - 1:
+                        error = sqrt((x - path_x0) ** 2 + (y - path_y0) ** 2)
+                        if error >= tolerance:
+                            print(
+                                "WARNING: Large error between path start and end points:\n"
+                            )
+                            print(f"path:\n    {name}")
+                            print(f"end point:\n    {x}\n    {y}\n")
+                            print(f"start point:\n    {path_x0}\n    {path_y0}\n")
+                        x, y = path_x0, path_y0
+
+                    writer.writerow(
+                        [
+                            f"{float(t):.15f}",
+                            f"{float(x):.15f}",
+                            f"{float(y):.15f}",
+                            "0.0",
+                            path_label,
+                            g_label,
+                        ]
+                    )
+
+
+# csv-to-control --------------------------------------------------------------
+
 boundary_data = []
 with open(csv_file, "r") as f:
     reader = csv.reader(f)
     next(reader, None)  # Skip header
     boundary_data = list(reader)
 
+
+inner_boundaries_exist = False
 path_index = {}
 index_counter = 0
 knot_count = []
@@ -45,18 +156,6 @@ for i, row in enumerate(boundary_data):
         knot_count[index_counter - 1].append(0)
         segment_counter += 1
     knot_count[index_counter - 1][segment_counter - 1] += 1
-
-
-def write_line(p0, p1, line_name=""):
-    x0, y0 = p0
-    x1, y1 = p1
-    f.write(r"        \begin{END_POINTS_LINE}" + "\n")
-    if line_name != "":
-        f.write(f"            name   = {line_name}" + "\n")
-    f.write(f"            xStart = {str([x0,y0,0.0])}" + "\n")
-    f.write(f"            xEnd   = {str([x1,y1,0.0])}" + "\n")
-    f.write(r"        \end{END_POINTS_LINE}" + "\n")
-
 
 with open(control_file, "w") as f:
     f.write(r"\begin{CONTROL_INPUT}" + "\n")
@@ -132,7 +231,7 @@ with open(control_file, "w") as f:
             shoelace_area = 0
             position_vectors = np.zeros((1, 2))
             init_path_row = row
-        # ---------------------------------------------------------------------
+
         coordinates = " ".join(row[0:4])
 
         # OUTER BOUNDARY ------------------------------------------------------
@@ -156,8 +255,9 @@ with open(control_file, "w") as f:
                 f.write(r"            \begin{SPLINE_DATA}" + "\n")
             f.write("                " + coordinates + "\n")
             plt.scatter(float(row[1]), float(row[2]))
+
         # INNER BOUNDARIES ----------------------------------------------------
-        elif row[5] == "InnerBoundary" and write_inner_boundaries:
+        elif row[5] == "InnerBoundaries" and write_inner_boundaries:
             inner_boundaries_exist = True
             if last_path_index == 0:
                 current_segment_index = 0
@@ -206,10 +306,9 @@ with open(control_file, "w") as f:
             f.write("                " + coordinates + "\n")
             plt.scatter(float(row[1]), float(row[2]))
         else:
+            # layers not named "OuterBoundary" or "InnerBoundaries" are skipped
             pass
-            # raise Warning(
-            #     "boundary_label needs to be 'OuterBoundary' or 'InnerBoundary'"
-            # )
+
         last_path_index = current_path_index
         last_segment_index = current_segment_index
         last_row = row
@@ -228,4 +327,5 @@ with open(control_file, "w") as f:
         f.write(r"\end{MODEL}" + "\n")
         f.write(r"\end{FILE}")
 
-plt.show()
+if plot:
+    plt.show()
