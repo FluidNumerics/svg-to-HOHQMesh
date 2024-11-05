@@ -1,0 +1,2 @@
+matplotlib>=3.9.2
+svgpathtools>=1.6.1
