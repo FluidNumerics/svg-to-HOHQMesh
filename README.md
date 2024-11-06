@@ -8,6 +8,13 @@ A simple script to generate [HOHQMesh]() `.control` files from SVGs.
 - [HOHQMesh](https://github.com/trixi-framework/HOHQMesh)
 - Python package requirements can be found in `requirements.txt`
 
+## Installation
+This project is currently just a single python script, so installation is extremely simple. Download the repository and run `pip install -r requirements.txt`. This should install all the necessary packages. After this, you're good to go! Just run: 
+
+```sh
+python svg-to-control.py <your-file>.svg
+```
+
 
 ## Getting Started
 
