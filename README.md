@@ -1,6 +1,18 @@
 # svg-to-HOHQMesh
 A simple script to generate [HOHQMesh]() `.control` files from SVGs.
 
+## Licensing
+svg-to-HOHQMesh is licensed for use under a [3 Clause BSD with attribution license](./LICENSE). [Fluid Numerics](https://www.fluidnumerics.com) is a small family-owned business. We want to make svg-to-HOHQMesh available to folks who want to build conservation laws that run on a wide range of platforms. Under the license, you can use, modify, and redistribute SELF so long as attribution is given to Fluid Numerics. 
+
+## How to support this repository
+Continued support of svg-to-HOHQMesh relies on users and customers. Here's a few ways you can support this project:
+
+* Give this repository a star on Github
+* [Open an issue](https://github.com/FluidNumerics/svg-to-HOHQMesh/issues/new) if you have a question or want to report a problem. We want to help!
+* [Subscribe to Fluid Numerics on Youtube](https://www.youtube.com/@FluidNumerics?sub_confirmation=1)
+* [Become a backer on Open Collective](https://opencollective.com/opensource-fluidnumerics)
+* [Work with us](https://www.fluidnumerics.com/services)
+
 
 ## Requirements
 
