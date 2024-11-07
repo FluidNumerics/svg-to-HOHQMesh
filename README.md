@@ -28,7 +28,7 @@ Continued support of svg-to-HOHQMesh relies on users and customers. Here's a few
 ## Installation
 This project is currently just a single python script, so installation is extremely simple. Download the repository and run `pip install -r requirements.txt`. This should install all the necessary packages. After this, you're good to go! Just run: 
 
-```sh
+```
 python svg-to-control.py <your-file>.svg
 ```
 
