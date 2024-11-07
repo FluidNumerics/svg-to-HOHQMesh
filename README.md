@@ -1,6 +1,5 @@
 # svg-to-HOHQMesh
 
-<!-- ![](img/pumpkin-thumbnail-transparent-480.png) -->
 <p align="center">
   <img height="440px" src="img/pumpkin-thumbnail-transparent.png" />
 </p>
@@ -59,8 +58,10 @@ Now, you should be good to save your SVG, and generate a `.control` with `python
 
 ## Example: Pumpkin
 
-![Constructing a pumpkin SVG in Inkscape](img/pumpkin-example.gif)
-Constructing a pumpkin SVG in Inkscape.
+<p align="center">
+  <img height="440px" src="img/pumpkin-example.gif" />
+  Constructing a pumpkin SVG in Inkscape.
+</p>
 
 All assets for this example can be found in `examples/pumpkin`. There are a few different `.svg`'s here: `pumpkin-raw.svg` (the file we will be starting with), `pumpkin.svg` (a sort of "ideal form" `svg`), and `pumpkin-smooth.svg` (a smoothed variation to accomodate meshing).
 
@@ -108,9 +109,10 @@ WARNING: Skipping erroneous line between path start and end
 
 We recommend [ParaView](https://github.com/Kitware/ParaView) for visualization.
 
-![A pumpkin mesh visualized in ParaView](img/paraview-pumpkin.png)
-A pumpkin mesh visualized in ParaView.
-
+<p align="center">
+  <img height="440px" src="img/paraview-pumpkin.png" />
+  A pumpkin mesh visualized in ParaView.
+</p>
 
 ## Preparing meshes for SELF
 ### Requirements
